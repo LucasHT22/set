@@ -39,6 +39,7 @@ func _ready():
 	$MarginContainer/VBoxContainer/SelectionUI.visible = false
 	$MarginContainer/VBoxContainer/SelectionUI/ButtonsRow/ConfirmButton.pressed.connect(confirm_set)
 	$MarginContainer/VBoxContainer/SelectionUI/ButtonsRow/CancelButton.pressed.connect(cancel_claim)
+	$NewGameButton.pressed.connect(new_game)
 	
 	create_deck()
 	deal_initial_cards()
@@ -46,12 +47,12 @@ func _ready():
 
 func create_deck():
 	for shape in 3:
-		for color in 3:
+		for card_color in 3:
 			for number in range(1, 4):
 				for shading in 3:
 					deck.append({
 						"shape": shape,
-						"color": color,
+						"card_color": card_color,
 						"number": number,
 						"shading": shading
 					})
@@ -68,7 +69,7 @@ func add_card_to_table(index: int):
 	var card_data = deck.pop_front()
 	var card = card_scene.instantiate()
 	$MarginContainer/VBoxContainer/CenterContainer/CardGrid.add_child(card)
-	card.setup(card_data.shape, card_data.color, card_data.number, card_data.shading, index)
+	card.setup(card_data.shape, card_data.card_color, card_data.number, card_data.shading, index)
 	card.gui_input.connect(func(event): _on_card_clicked(event, card))
 	table_cards.append(card)
 
@@ -111,7 +112,7 @@ func confirm_set():
 	
 	var is_valid = (
 		check_atribute(c1.shape, c2.shape, c3.shape) and 
-		check_atribute(c1.color, c2.color, c3.color) and 
+		check_atribute(c1.card_color, c2.card_color, c3.card_color) and 
 		check_atribute(c1.number, c2.number, c3.number) and 
 		check_atribute(c1.shading, c2.shading, c3.shading)
 	)

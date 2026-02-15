@@ -1,11 +1,12 @@
 extends Control
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$CenterContainer/VBoxContainer/ButtonContainer/Player1Btn.pressed.connect(func(): start_game(1))
+	$CenterContainer/VBoxContainer/ButtonContainer/Player2Btn.pressed.connect(func(): start_game(2))
+	$CenterContainer/VBoxContainer/ButtonContainer/Player3Btn.pressed.connect(func(): start_game(3))
+	$CenterContainer/VBoxContainer/ButtonContainer/Player4Btn.pressed.connect(func(): start_game(4))
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func start_game(num_players: int):
+	Global.num_players = num_players
+	Global.reset_scores()
+	get_tree().change_scene_to_file("res://scenes/main_game.tscn")
