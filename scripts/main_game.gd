@@ -9,10 +9,10 @@ var is_claiming = false
 
 func _ready():
 	var claim_buttons = [
-		$ClaimButtons/Player1Claim,
-		$ClaimButtons/Player2Claim,
-		$ClaimButtons/Player3Claim,
-		$ClaimButtons/Player4Claim
+		$MarginContainer/VBoxContainer/ClaimButtons/Player1Claim,
+		$MarginContainer/VBoxContainer/ClaimButtons/Player2Claim,
+		$MarginContainer/VBoxContainer/ClaimButtons/Player3Claim,
+		$MarginContainer/VBoxContainer/ClaimButtons/Player4Claim
 	]
 	
 	for i in range(4):
@@ -70,23 +70,22 @@ func add_card_to_table(index: int):
 	var card = card_scene.instantiate()
 	$MarginContainer/VBoxContainer/CenterContainer/CardGrid.add_child(card)
 	card.setup(card_data.shape, card_data.card_color, card_data.number, card_data.shading, index)
-	card.gui_input.connect(func(event): _on_card_clicked(event, card))
+	card.card_clicked.connect(_on_card_clicked)
 	table_cards.append(card)
 
-func _on_card_clicked(event, card):
+func _on_card_clicked(card):
 	if not is_claiming:
 		return
-	
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if card.is_selected:
-			card.set_selected(false)
-			selected_cards.erase(card)
-		else:
-			if selected_cards.size() < 3:
-				card.set_selected.append(true)
-				selected_cards.append(card)
+
+	if card.is_selected:
+		card.set_selected(false)
+		selected_cards.erase(card)
+	else:
+		if selected_cards.size() < 3:
+			card.set_selected(true)
+			selected_cards.append(card)
 		
-		$MarginContainer/VBoxContainer/SelectionUI/InstructionLabel.text = "Player %d: Select 3 cards (%d/3 selected)" % [claiming_player, selected_cards.size()]
+	$MarginContainer/VBoxContainer/SelectionUI/InstructionLabel.text = "Player %d: Select 3 cards (%d/3 selected)" % [claiming_player, selected_cards.size()]
 
 func player_claims_set(player_num: int):
 	claiming_player = player_num

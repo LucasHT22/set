@@ -13,14 +13,16 @@ script = ExtResource("1_khswy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1153.0
+offset_bottom = 648.0
 color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -2.0
+offset_top = 25.0
+offset_right = 1150.0
+offset_bottom = 626.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -58,6 +60,7 @@ text = "Player 4: 0"
 [node name="MessageLabel" type="Label" parent="MarginContainer/VBoxContainer/TopUI"]
 layout_mode = 2
 text = "Click your button when you see a SET!"
+horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -67,6 +70,32 @@ layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 15
 columns = 4
+
+[node name="SelectionUI" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="InstructionLabel" type="Label" parent="MarginContainer/VBoxContainer/SelectionUI"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Player X: Click 3 cards for your SET"
+horizontal_alignment = 1
+
+[node name="ButtonsRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SelectionUI"]
+layout_mode = 2
+alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer/SelectionUI/ButtonsRow"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "✓ CONFIRM SET"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/SelectionUI/ButtonsRow"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "✗ CANCEL"
 
 [node name="ClaimButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -93,34 +122,11 @@ custom_minimum_size = Vector2(180, 70)
 layout_mode = 2
 text = "PLAYER 4 CLAIMS!"
 
-[node name="SelectionUI" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="InstructionLabel" type="Label" parent="MarginContainer/VBoxContainer/SelectionUI"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Player X: Click 3 cards for your SET"
-horizontal_alignment = 1
-
-[node name="ButtonsRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SelectionUI"]
-layout_mode = 2
-
-[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer/SelectionUI/ButtonsRow"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-text = "✓ CONFIRM SET"
-
-[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/SelectionUI/ButtonsRow"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-text = "✗ CANCEL"
-
 [node name="NewGameButton" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 1051.0
+offset_top = 578.0
+offset_right = 1151.0
+offset_bottom = 628.0
 text = "New Game"
