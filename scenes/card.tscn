@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfg8wx5h6nv5g"]
+
+[ext_resource type="Script" path="res://card.gd" id="1_8g634"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkugh"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22bpk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 0, 1)
+
+[node name="Card" type="Control"]
+custom_minimum_size = Vector2(100, 140)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8g634")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lkugh")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Shape1" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Shape2" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Shape3" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="SelectBorder" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_22bpk")
