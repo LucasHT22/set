@@ -43,20 +43,17 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Shape1" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Shade1" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
-color = Color(1, 0, 0, 1)
 
-[node name="Shape2" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Shade2" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
-color = Color(1, 0, 0, 1)
 
-[node name="Shape3" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Shade3" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
-color = Color(1, 0, 0, 1)
 
 [node name="SelectBorder" type="Panel" parent="."]
 visible = false

@@ -50,6 +50,34 @@ func update_visual():
 	for i in range(3):
 		if i < number:
 			shapes[i].visible = true
-			shapes[i].color = shape_color
+			apply_shading(shapes[i], shape_color)
 		else:
 			shapes[i].visible = false
+
+func apply_shading(shape_rect: ColorRect, base_color: Color):
+	var style_box = StyleBoxFlat.new()
+	
+	match shading:
+		Shading.SOLID:
+			style_box.bg_color = base_color
+			style_box.border_width_left = 0
+			style_box.border_width_right = 0
+			style_box.border_width_top = 0
+			style_box.border_width_bottom = 0
+		Shading.STRIPED:
+			style_box.bg_color = base_color
+			style_box.bg_color.a = 0.4
+			style_box.border_width_left = 3
+			style_box.border_width_right = 3
+			style_box.border_width_top = 3
+			style_box.border_width_bottom = 3
+			style_box.border_color = base_color
+		Shading.OPEN:
+			style_box.bg_color = Color.TRANSPARENT
+			style_box.border_width_left = 3
+			style_box.border_width_right = 3
+			style_box.border_width_top = 3
+			style_box.border_width_bottom = 3
+			style_box.border_color = base_color
+	
+	shape_panel.add_theme_stylebox_override("panel", style_box)
