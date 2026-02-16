@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfg8wx5h6nv5g"]
+[gd_scene load_steps=5 format=3 uid="uid://cfg8wx5h6nv5g"]
 
 [ext_resource type="Script" path="res://card.gd" id="1_8g634"]
+[ext_resource type="Script" path="res://scripts/shape_drawer.gd" id="2_oqnup"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkugh"]
 bg_color = Color(1, 1, 1, 1)
@@ -41,6 +42,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ShapeContainer" type="Control" parent="Panel/MarginContainer"]
 custom_minimum_size = Vector2(80, 120)
 layout_mode = 2
+script = ExtResource("2_oqnup")
 
 [node name="SelectBorder" type="Panel" parent="."]
 visible = false
