@@ -38,21 +38,8 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="Shade1" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(60, 40)
-layout_mode = 2
-
-[node name="Shade2" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(60, 40)
-layout_mode = 2
-
-[node name="Shade3" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(60, 40)
+[node name="ShapeContainer" type="Control" parent="Panel/MarginContainer"]
+custom_minimum_size = Vector2(80, 120)
 layout_mode = 2
 
 [node name="SelectBorder" type="Panel" parent="."]
