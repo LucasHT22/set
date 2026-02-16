@@ -82,49 +82,25 @@ func draw_diamond_shape(rect: Rect2, color: Color, shading_type):
 
 func draw_squiggle_shape(rect: Rect2, color: Color, shading_type):
 	var points = PackedVector2Array()
+	var center = rect.position + rect.size / 2
 	
-	var left_x = rect.position.x
-	var right_x = rect.position.x + rect.size.x
-	var top_y = rect.position.y
-	var bottom_y = rect.position.y + rect.size.y
-	var mid_y = rect.position.y + rect.size.y / 2
+	var num_points = 60
 	
-	var p0 = Vector2(left_x + rect.size.x * 0.2, top_y + rect.size.y * 0.3)
-	var p1 = Vector2(left_x + rect.size.x * 0.4, top_y)
-	var p2 = Vector2(right_x - rect.size.x * 0.4, top_y)
-	var p3 = Vector2(right_x - rect.size.x * 0.2, top_y + rect.size.y * 0.3)
-	
-	var steps = 20
-	for i in range(steps + 1):
-		var t = float(i) / steps
-		points.append(bezier_cubic(p0, p1, p2, p3, t))
-	
-	var r0 = p3
-	var r1 = Vector2(right_x, mid_y - rect.size.y * 0.1)
-	var r2 = Vector2(right_x, mid_y + rect.size.y * 0.1)
-	var r3 = Vector2(right_x - rect.size.x * 0.2, bottom_y - rect.size.y * 0.3)
-	
-	for i in range(1, steps + 1):
-		var t = float(i) / steps
-		points.append(bezier_cubic(r0, r1, r2, r3, t))
-	
-	var b0 = r3
-	var b1 = Vector2(right_x - rect.size.x * 0.4, bottom_y)
-	var b2 = Vector2(left_x + rect.size.x * 0.4, bottom_y)
-	var b3 = Vector2(left_x + rect.size.x * 0.2, bottom_y - rect.size.y * 0.3)
-	
-	for i in range(1, steps + 1):
-		var t = float(i) / steps
-		points.append(bezier_cubic(b0, b1, b2, b3, t))
-	
-	var l0 = b3
-	var l1 = Vector2(left_x, mid_y + rect.size.y * 0.1)
-	var l2 = Vector2(left_x, mid_y - rect.size.y * 0.1)
-	var l3 = p0
-	
-	for i in range(1, steps):
-		var t = float(i) / steps
-		points.append(bezier_cubic(l0, l1, l2, l3, t))
+	for i in range(num_points):
+		var angle = (i * TAU) / num_points
+		
+		var base_radius_x = rect.size.x / 2
+		var base_radius_y = rect.size.y / 2
+		
+		var wave1 = sin(angle * 2) * 0.25
+		var wave2 = sin(angle * 4) * 0.1
+		
+		var radius_x = base_radius_x * (1.0 + wave1 + wave2)
+		var radius_y = base_radius_y * (1.0 - wave1 * 0.5 + wave2)
+		
+		var x = center.x + cos(angle) * radius_x
+		var y = center.y + sin(angle) * radius_y
+		points.append(Vector2(x, y))
 	
 	match shading_type:
 		0:
@@ -135,18 +111,4 @@ func draw_squiggle_shape(rect: Rect2, color: Color, shading_type):
 				draw_line(Vector2(x, rect.position.y), Vector2(x, rect.position.y + rect.size.y), color, 1.5)
 			draw_polyline(points + PackedVector2Array([points[0]]), color, 2.0)
 		2:
-			draw_polyline(points + PackedVector2Array([points[0]]), color, 2.0)
-
-func bezier_cubic(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float) -> Vector2:
-	var u = 1.0 - t
-	var tt = t * t
-	var uu = u * u
-	var uuu = uu * u
-	var ttt = tt * t
-	
-	var point = uuu * p0
-	point += 3 * uu * t * p1
-	point += 3 * u * tt * p2
-	point += ttt * p3
-	
-	return point
+			draw_polyline(points + PackedVector2Array([points[0]]), color, 2.5)
